@@ -1,0 +1,492 @@
+PROGRAM 1:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp"
+        android:text="Welcome To GUI"
+        android:textColor="#ff0000" 
+        android:textSize="24dp"/>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewResult"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:ems="10"
+        android:hint="Enter your name" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="click Me"
+        android:textColor="#00ff00" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:textSize="20dp" />
+
+</RelativeLayout>
+
+
+
+
+package com.example.kalaimathi;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	TextView titleText,textViewResult;
+	EditText editTextName;
+	Button buttonShow;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        titleText=(TextView)findViewById(R.id.titleText);
+        textViewResult = (TextView)findViewById(R.id.textViewResult);
+        editTextName=(EditText)findViewById(R.id.editTextName);
+        buttonShow=(Button)findViewById(R.id.buttonShow);
+        buttonShow.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				String name=editTextName.getText().toString();
+				textViewResult.setText(name);
+				
+			}
+		});
+        		
+    }  
+             
+    }
+
+
+
+PROGRAM 2:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:padding="16dp" >
+
+        <EditText
+            android:id="@+id/editUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/editPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/editAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address" />
+
+        <RadioGroup
+            android:id="@+id/radioGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/editAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:inputType="number" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <Spinner
+            android:id="@+id/spinnerState"
+            android:layout_width="match_parent"
+            android:layout_height="49dp" />
+
+        <!-- Submit Button -->
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Submit" />
+
+        <!-- Output Display -->
+
+        <TextView
+            android:id="@+id/textOutput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+package com.example.program2;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	EditText editUsername, editPassword, editAddress, editAge;
+	RadioGroup radioGender;
+	DatePicker datePicker;
+	Spinner spinnerState;
+	Button btnSubmit;
+	TextView textOutput;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		editUsername = (EditText) findViewById(R.id.editUsername);
+		editPassword = (EditText) findViewById(R.id.editPassword);
+		editAddress = (EditText) findViewById(R.id.editAddress);
+		editAge = (EditText) findViewById(R.id.editAge);
+		radioGender = (RadioGroup) findViewById(R.id.radioGender);
+		datePicker = (DatePicker) findViewById(R.id.datePicker);
+		spinnerState = (Spinner) findViewById(R.id.spinnerState);
+		btnSubmit = (Button) findViewById(R.id.btnSubmit);
+		textOutput = (TextView) findViewById(R.id.textOutput);
+
+		// Populate spinner
+		String[] states = { "Select State", "Tamil Nadu", "Kerala",
+				"Karnataka", "Andhra Pradesh" };
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_dropdown_item, states);
+		spinnerState.setAdapter(adapter);
+
+		btnSubmit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				String username = editUsername.getText().toString();
+				String password = editPassword.getText().toString();
+				String address = editAddress.getText().toString();
+				String age = editAge.getText().toString();
+
+				int selectedGenderId = radioGender.getCheckedRadioButtonId();
+				RadioButton selectedGender = (RadioButton) findViewById(selectedGenderId);
+				String gender = (selectedGender != null) ? selectedGender
+						.getText().toString() : "Not selected";
+
+				String dob = datePicker.getDayOfMonth() + "/"
+						+ (datePicker.getMonth() + 1) + "/"
+						+ datePicker.getYear();
+
+				String state = spinnerState.getSelectedItem().toString();
+
+				String result = "Username: " + username + "\n" + "Password: "
+						+ password + "\n" + "Address: " + address + "\n"
+						+ "Gender: " + gender + "\n" + "Age: " + age + "\n"
+						+ "DOB: " + dob + "\n" + "State: " + state;
+
+				textOutput.setText(result);
+			}
+		});
+	}
+
+}
+
+
+PROGRAM 3:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+   <Button
+       android:id="@+id/btnShowDialog"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="134dp"
+       android:text="Show Alert Dialog" />
+
+</RelativeLayout>
+
+package com.example.program3;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		Button btnShow = (Button) findViewById(R.id.btnShowDialog);
+
+		btnShow.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MainActivity.this);
+				builder.setTitle("Alert");
+				builder.setMessage("This is a simple alert dialog.");
+				builder.setPositiveButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.dismiss(); // Closes dialog
+							}
+						});
+
+				AlertDialog dialog = builder.create();
+				dialog.show();
+			}
+		});
+	}
+
+}
+
+
+PROGRAM 4:
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/btnShowProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="167dp"
+        android:text="Start Task" />
+
+</RelativeLayout>
+
+package com.example.prog4;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.app.ProgressDialog;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends Activity {
+	Button btnShowProgress;
+	ProgressDialog progressDialog;
+	Handler handler= new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    btnShowProgress=(Button) findViewById(R.id.btnShowProgress);
+        btnShowProgress.setOnClickListener(new View.OnClickListener(){
+        	@Override
+        	public void onClick(View v){
+        		progressDialog=new ProgressDialog(MainActivity.this);
+        	       progressDialog.setMessage("Processing....");
+        		   progressDialog.setTitle("Please wait");
+        		   progressDialog.setCancelable(false);
+        		   progressDialog.show();
+        		   
+        		   handler.postDelayed(new Runnable(){
+        			   @Override
+        			   public void run(){
+        				   progressDialog.dismiss();
+        			   }
+        		   },7000);
+        	}
+
+		
+        });
+    }
+}
+        				   
+        	
+PROGRAM 5:	  
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+    <LinearLayout
+        
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp" >
+
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start" />
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Stop" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
+package com.example.prog5;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	Button btnStart, btnStop;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		btnStart = (Button) findViewById(R.id.btnStart);
+		btnStop = (Button) findViewById(R.id.btnStop);
+
+		btnStart.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(MainActivity.this, "Started", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
+		btnStop.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(MainActivity.this, "Stopped", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
+	}
+
+}
+
+
