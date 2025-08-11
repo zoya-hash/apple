@@ -227,13 +227,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($email)) {
         $errors[] = "Email is required.";
-  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
 
     if (empty($pass)) {
         $errors[] = "Password is required.";
-    } elseif (!preg_match("/^(?=.[A-Za-z])(?=.\d).{6,}$/", $pass)) {
+    } elseif (!preg_match("/^(?=.*[A-Za-z])(?=.*\d).{6,}$/", $pass)) {
         $errors[] = "Password must be at least 6 characters and contain letters and numbers.";
     }
 
@@ -249,6 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 </body>
 </html>
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 PROGRAM 5
 <!DOCTYPE html>
@@ -270,7 +271,7 @@ PROGRAM 5
 <hr>
 
 <?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name   = trim($_POST['name']);
     $roll   = trim($_POST['roll']);
     $email  = trim($_POST['email']);
@@ -278,31 +279,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $errors = [];
 
-    if(empty($name)){
+    if (empty($name)) {
         $errors[] = "Name is required.";
-    } elseif(!preg_match("/^[a-zA-Z ]+$/", $name)){
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $name)) {
         $errors[] = "Name can only contain letters and spaces.";
     }
 
-    if(empty($roll)){
+    if (empty($roll)) {
         $errors[] = "Roll Number is required.";
-    } elseif(!preg_match("/^[0-9]+$/", $roll)){
+    } elseif (!preg_match("/^[0-9]+$/", $roll)) {
         $errors[] = "Roll Number can only contain digits.";
     }
- if(empty($email)){
+
+    if (empty($email)) {
         $errors[] = "Email is required.";
-    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
 
-    if(empty($course)){
+    if (empty($course)) {
         $errors[] = "Course is required.";
-    } elseif(!preg_match("/^[a-zA-Z ]+$/", $course)){
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $course)) {
         $errors[] = "Course can only contain letters and spaces.";
     }
 
-    if($errors){
-        foreach($errors as $e){
+    if ($errors) {
+        foreach ($errors as $e) {
             echo "<p style='color:red;'>$e</p>";
         }
     } else {
