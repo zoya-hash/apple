@@ -46,115 +46,112 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </html> 
 ---------------------------------------------------------------------------------------------------------------------------------------
 PROGRAM 2A
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP File Handling</title>
+</head>
+<body>
+<h2>File Handling Operations</h2>
 
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>PHP File Handling</title> 
-</head> 
-<body> 
-<h2>File Handling Operations</h2> 
- 
-<form method="post" action="program2.php"> 
-    <p>Enter choice:   
-       1 = Write, 2 = Read, 3 = Append, 4 = Delete</p> 
-    <input type="number" name="choice" min="1" max="4" required><br><br> 
- 
-    <input type="submit" value="Execute"> 
-</form> 
- 
-<hr> 
- 
-<?php 
-if ($_SERVER["REQUEST_METHOD"] === "POST") { 
- 
-    $file   = "example.txt"; 
-    $choice = $_POST['choice']; 
- 
-    switch ($choice) { 
-        case 1: // Write fixed text 
-            file_put_contents($file, "This is sample content.\n"); 
-            echo "Content written to file."; 
-            break; 
- 
-        case 2: // Read 
-            echo file_exists($file) ? nl2br(file_get_contents($file)) : "File not found."; 
-            break; 
- 
-        case 3: // Append fixed text 
-            file_put_contents($file, "Appended line.\n", FILE_APPEND); 
-            echo "Content appended."; 
-            break; 
- 
-        case 4: // Delete 
-            echo (file_exists($file) && unlink($file)) ? "File deleted." : "File not found."; 
-            break; 
- 
-        default: 
-            echo "Invalid choice."; 
-    } 
-} 
+<form method="post" action="">
+    <p>Enter choice: 1 = Write, 2 = Read, 3 = Append, 4 = Delete</p>
+    <input type="number" name="choice" min="1" max="4" required><br><br>
+    <input type="submit" value="Execute">
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $file   = "example.txt";
+    $choice = (int)$_POST['choice'];
+
+    switch ($choice) {
+        case 1:
+            file_put_contents($file, "This is sample content.\n");
+            echo "Content written to file.";
+            break;
+
+        case 2:
+            echo file_exists($file) ? nl2br(file_get_contents($file)) : "File not found.";
+            break;
+
+        case 3:
+            file_put_contents($file, "Appended line.\n", FILE_APPEND);
+            echo "Content appended.";
+            break;
+
+        case 4:
+            echo (file_exists($file) && unlink($file)) ? "File deleted." : "File not found.";
+            break;
+
+        default:
+            echo "Invalid choice.";
+    }
+}
 ?>
-</body> 
+</body>
 </html>
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 PROGRAM 2B
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>String, Math & Date Functions</title> 
-</head> 
-<body> 
-<h2>PHP Functions Demo</h2> 
- 
-<form method="post" action=""> 
-    <p>Enter choice: 1 = String, 2 = Math, 3 = Date</p> 
-    <input type="number" name="choice" min="1" max="3" required><br><br> 
- 
-    <p>Enter a value (if needed):</p> 
-    <input type="text" name="value"><br><br> 
- 
-    <input type="submit" value="Run"> 
-</form> 
- 
-<hr> 
- 
-<?php 
-if ($_SERVER["REQUEST_METHOD"] === "POST") { 
-    $c = $_POST['choice']; 
-    $v = $_POST['value']; 
- 
-    switch ($c) { 
-        case 1: // String functions demo 
-            echo "Original: $v<br>"; 
-            echo "Length: " . strlen($v) . "<br>"; 
-            echo "Uppercase: " . strtoupper($v) . "<br>"; 
-            echo "Reverse: " . strrev($v); 
-            break; 
- 
-        case 2: // Math functions demo 
-            $n = (float)$v; 
-            echo "Number: $n<br>"; 
-            echo "Square root: " . sqrt($n) . "<br>"; 
-            echo "Power of 2: " . pow($n, 2) . "<br>"; 
-            echo "Random (1-100): " . rand(1, 100); 
-            break; 
- 
-        case 3: // Date functions demo 
-            echo "Current Date: " . date("Y-m-d") . "<br>"; 
-            echo "Current Time: " . date("H:i:s") . "<br>"; 
-            echo "Day: " . date("l") . "<br>"; 
-            echo "Timestamp: " . time(); 
-            break; 
- 
-        default: 
-            echo "Invalid choice."; 
-    } 
-} 
-?> 
-</body> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String, Math & Date Functions</title>
+</head>
+<body>
+<h2>PHP Functions Demo</h2>
+
+<form method="post" action="">
+    <p>Enter choice: 1 = String, 2 = Math, 3 = Date</p>
+    <input type="number" name="choice" min="1" max="3" required><br><br>
+
+    <p>Enter a value (if needed):</p>
+    <input type="text" name="value"><br><br>
+
+    <input type="submit" value="Run">
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $c = (int)$_POST['choice'];
+    $v = $_POST['value'];
+
+    switch ($c) {
+        case 1:
+            echo "Original: $v<br>";
+            echo "Length: " . strlen($v) . "<br>";
+            echo "Uppercase: " . strtoupper($v) . "<br>";
+            echo "Reverse: " . strrev($v);
+ break;
+
+        case 2:
+            $n = (float)$v;
+            echo "Number: $n<br>";
+            echo "Square root: " . sqrt($n) . "<br>";
+            echo "Power of 2: " . pow($n, 2) . "<br>";
+            echo "Random (1-100): " . rand(1, 100);
+            break;
+
+        case 3:
+            echo "Current Date: " . date("Y-m-d") . "<br>";
+            echo "Current Time: " . date("H:i:s") . "<br>";
+            echo "Day: " . date("l") . "<br>";
+            echo "Timestamp: " . time();
+            break;
+
+        default:
+            echo "Invalid choice.";
+    }
+}
+?>
+</body>
 </html>
+
 ------------------------------------------------------------------------------------------------------------------------------------------
 PROGRAM 3
 <!DOCTYPE html> 
@@ -197,113 +194,122 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </html>
 -----------------------------------------------------------------------------------------------------------------------------------------
 PROGRAM 4
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Required Field Validation</title>
+</head>
+<body>
+<h2>Form with Required Fields</h2>
 
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>Required Field Validation</title> 
-</head> 
-<body> 
-<h2>Form with Required Fields</h2> 
- 
-<form method="post" action=""> 
-    Name: <input type="text" name="name"><br><br> 
-    Email: <input type="text" name="email"><br><br> 
-    Password: <input type="password" name="password"><br><br> 
-    <input type="submit" value="Submit"> 
-</form> 
- 
-<hr> 
- 
-<?php 
-if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-    $name  = trim($_POST['name']); 
-    $email = trim($_POST['email']); 
-    $pass  = trim($_POST['password']); 
- 
-    $errors = []; 
- 
-    // Name: only letters and spaces 
-    if (empty($name)) $errors[] = "Name is required."; 
-    elseif (!preg_match("/^[a-zA-Z ]+$/", $name)) $errors[] = "Name can only contain letters 
-and spaces."; 
- 
-    // Email: Valid email format 
-    if (empty($email)) $errors[] = "Email is required."; 
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email format."; 
- 
-    // Password: Minimum 6 chars, must contain letters & numbers 
-    if (empty($pass)) $errors[] = "Password is required."; 
-    elseif (!preg_match("/^(?=.*[A-Za-z])(?=.*\d).{6,}$/", $pass)) 
-        $errors[] = "Password must be at least 6 characters and contain letters and numbers."; 
- 
-    // Show results 
-    if ($errors) { 
-        foreach ($errors as $e) echo "<p style='color:red;'>$e</p>"; 
-    } else { 
-        echo "Form submitted successfully!<br>"; 
-        echo "Name: $name<br>Email: $email<br>Password: $pass"; 
-    } 
-} 
-?> 
-</body> 
-</html> 
+<form method="post" action="">
+    Name: <input type="text" name="name"><br><br>
+    Email: <input type="text" name="email"><br><br>
+    Password: <input type="password" name="password"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<hr>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name  = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $pass  = trim($_POST['password']);
+
+    $errors = [];
+
+    if (empty($name)) {
+        $errors[] = "Name is required.";
+    } elseif (!preg_match("/^[a-zA-Z ]+$/", $name)) {
+        $errors[] = "Name can only contain letters and spaces.";
+    }
+
+    if (empty($email)) {
+        $errors[] = "Email is required.";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
+    }
+
+    if (empty($pass)) {
+        $errors[] = "Password is required.";
+    } elseif (!preg_match("/^(?=.[A-Za-z])(?=.\d).{6,}$/", $pass)) {
+        $errors[] = "Password must be at least 6 characters and contain letters and numbers.";
+    }
+
+    if ($errors) {
+        foreach ($errors as $e) {
+            echo "<p style='color:red;'>$e</p>";
+        }
+    } else {
+        echo "Form submitted successfully!<br>";
+        echo "Name: $name<br>Email: $email<br>Password: $pass";
+    }
+}
+?>
+</body>
+</html>
 ------------------------------------------------------------------------------------------------------------------------------------------
 PROGRAM 5
-<!DOCTYPE html> 
-<html> 
-<head> 
-<title>College Library - Student Form</title> 
-</head> 
-<body> 
-<h2>Student Details Form</h2> 
- 
-<form method="post"> 
-    Name: <input type="text" name="name"><br><br> 
-    Roll No: <input type="text" name="roll"><br><br> 
-    Email: <input type="text" name="email"><br><br> 
-    Course: <input type="text" name="course"><br><br> 
-    <input type="submit" value="Submit"> 
-</form> 
- 
-<hr> 
- 
-<?php 
-if($_SERVER["REQUEST_METHOD"] == "POST"){ 
-    $name   = trim($_POST['name']); 
-    $roll   = trim($_POST['roll']); 
-    $email  = trim($_POST['email']); 
-    $course = trim($_POST['course']); 
- 
-    $errors = []; 
-// Name: only letters and spaces 
-    if(empty($name)) $errors[] = "Name is required."; 
-    elseif(!preg_match("/^[a-zA-Z ]+$/", $name)) $errors[] = "Name can only contain letters 
-and spaces."; 
- 
-    // Roll No: only numbers 
-    if(empty($roll)) $errors[] = "Roll Number is required."; 
-    elseif(!preg_match("/^[0-9]+$/", $roll)) $errors[] = "Roll Number can only contain 
-digits."; 
- 
-    // Email: valid email format 
-    if(empty($email)) $errors[] = "Email is required."; 
-    elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email format."; 
- 
-    // Course: only letters and spaces 
-    if(empty($course)) $errors[] = "Course is required."; 
-    elseif(!preg_match("/^[a-zA-Z ]+$/", $course)) $errors[] = "Course can only contain 
-letters and spaces."; 
- 
-    // Show results 
-    if($errors){ 
-        foreach($errors as $e) echo "<p style='color:red;'>$e</p>"; 
-    } else { 
-        echo "<h3>Student Details Submitted:</h3>"; 
-        echo "Name: $name<br>Roll No: $roll<br>Email: $email<br>Course: $course"; 
-    } 
-} 
-?> 
-</body> 
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Library - Student Form</title>
+</head>
+<body>
+<h2>Student Details Form</h2>
+
+<form method="post" action="">
+    Name: <input type="text" name="name"><br><br>
+    Roll No: <input type="text" name="roll"><br><br>
+    Email: <input type="text" name="email"><br><br>
+    Course: <input type="text" name="course"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+<hr>
+
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $name   = trim($_POST['name']);
+    $roll   = trim($_POST['roll']);
+    $email  = trim($_POST['email']);
+    $course = trim($_POST['course']);
+
+    $errors = [];
+
+    if(empty($name)){
+        $errors[] = "Name is required.";
+    } elseif(!preg_match("/^[a-zA-Z ]+$/", $name)){
+        $errors[] = "Name can only contain letters and spaces.";
+    }
+
+    if(empty($roll)){
+        $errors[] = "Roll Number is required.";
+    } elseif(!preg_match("/^[0-9]+$/", $roll)){
+        $errors[] = "Roll Number can only contain digits.";
+    }
+ if(empty($email)){
+        $errors[] = "Email is required.";
+    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $errors[] = "Invalid email format.";
+    }
+
+    if(empty($course)){
+        $errors[] = "Course is required.";
+    } elseif(!preg_match("/^[a-zA-Z ]+$/", $course)){
+        $errors[] = "Course can only contain letters and spaces.";
+    }
+
+    if($errors){
+        foreach($errors as $e){
+            echo "<p style='color:red;'>$e</p>";
+        }
+    } else {
+        echo "<h3>Student Details Submitted:</h3>";
+        echo "Name: $name<br>Roll No: $roll<br>Email: $email<br>Course: $course";
+    }
+}
+?>
+</body>
 </html>
---------------------------------------------------------------------------------------------------------------------------------------
