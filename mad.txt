@@ -489,4 +489,792 @@ public class MainActivity extends Activity {
 
 }
 
+PROGRAM 6:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:paddingBottom="@dimen/activity_vertical_margin" 
+    android:paddingLeft="@dimen/activity_horizontal_margin" 
+    android:paddingRight="@dimen/activity_horizontal_margin" 
+    android:paddingTop="@dimen/activity_vertical_margin" 
+    tools:context=".MainActivity" > 
+ 
+    <LinearLayout 
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent" 
+        android:gravity="center" 
+        android:orientation="vertical" 
+        android:padding="20dp" > 
+ 
+        <Button 
+            android:id="@+id/btnWeb" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="Open Webpage" /> 
+ 
+        <Button 
+            android:id="@+id/btnCall" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="10dp" 
+            android:text="Make a Call" /> 
+ 
+        <Button 
+            android:id="@+id/btnSMS" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="10dp" 
+            android:text="Send SMS" /> 
+ 
+        <Button 
+            android:id="@+id/btnCamera" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="10dp" 
+            android:text="Open Camera" /> 
+ 
+        <Button 
+            android:id="@+id/btnNext" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="10dp" 
+            android:text="Next Activity" /> 
+    </LinearLayout> 
+ 
+</RelativeLayout> 
+ 
+ 
+ 
+ 
+
+MainActivity.java 
+package com.example.six; 
+ 
+import android.app.Activity; 
+import android.content.Intent; 
+import android.net.Uri; 
+import android.os.Bundle; 
+import android.provider.MediaStore; 
+import android.view.View; 
+import android.widget.Button; 
+ 
+public class MainActivity extends Activity { 
+  
+ Button btnWeb, btnCall, btnSMS, btnCamera, btnNext; 
+ 
+    @Override 
+    protected void onCreate(Bundle savedInstanceState) { 
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_main); 
+        btnWeb = (Button) findViewById(R.id.btnWeb); 
+        btnCall = (Button) findViewById(R.id.btnCall); 
+        btnSMS = (Button) findViewById(R.id.btnSMS); 
+        btnCamera = (Button) findViewById(R.id.btnCamera); 
+        btnNext = (Button) findViewById(R.id.btnNext); 
+        btnWeb.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, 
+Uri.parse("https://www.google.com")); 
+                startActivity(webIntent); 
+            } 
+        }); 
+ btnCall.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent callIntent = new Intent(Intent.ACTION_DIAL); 
+                callIntent.setData(Uri.parse("tel:1234567890")); 
+                startActivity(callIntent); 
+            } 
+        }); 
+        btnSMS.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO); 
+                smsIntent.setData(Uri.parse("smsto:9876543210")); 
+                smsIntent.putExtra("sms_body", "Hello! This is a test SMS."); 
+                startActivity(smsIntent); 
+            } 
+        }); 
+   btnCamera.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); 
+                startActivity(cameraIntent); 
+            } 
+        }); 
+btnNext.setOnClickListener(new View.OnClickListener() { 
+            @Override 
+            public void onClick(View v) { 
+                Intent nextIntent = new Intent(MainActivity.this, SecondActivity.class); 
+                startActivity(nextIntent); 
+            } 
+        }); 
+    } 
+} 
+ AndroidMainfest.xml 
+<?xml version="1.0" encoding="utf-8"?> 
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" 
+    package="com.example.six" 
+    android:versionCode="1" 
+    android:versionName="1.0" > 
+ 
+    <uses-sdk 
+        android:minSdkVersion="8" 
+        android:targetSdkVersion="18" /> 
+    <uses-permission android:name="android.permission.CALL_PHONE"/> 
+    <uses-permission android:name="android.permission.SEND_SMS"/> 
+    <uses-permission android:name="android.permission.CAMERA"/> 
+ 
+    <application 
+        android:allowBackup="true" 
+        android:icon="@drawable/ic_launcher" 
+        android:label="@string/app_name" 
+        android:theme="@style/AppTheme" > 
+        <activity 
+            android:name="com.example.six.MainActivity" 
+            android:label="@string/app_name" > 
+            <intent-filter> 
+                <action android:name="android.intent.action.MAIN" /> 
+ 
+                <category android:name="android.intent.category.LAUNCHER" /> 
+            </intent-filter> 
+        </activity> 
+        <activity android:name=".SecondActivity"></activity> 
+    </application> 
+ 
+</manifest> 
+ 
+SecondActivity.java 
+package com.example.six; 
+ 
+import android.app.Activity; 
+import android.os.Bundle; 
+import android.widget.TextView; 
+ 
+public class SecondActivity extends Activity{ 
+  @Override 
+     protected void onCreate(Bundle savedInstanceState) { 
+         super.onCreate(savedInstanceState); 
+         TextView tv = new TextView(this); 
+         tv.setText("Welcome to Second Activity (Explicit Intent)"); 
+         tv.setTextSize(20); 
+         setContentView(tv); 
+     } 
+} 
+ 
+PROGRAM 7:
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    
+    <TextView
+        android:id="@+id/txtCurrent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Currently showing: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnLinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Linear"/>
+
+        <Button
+            android:id="@+id/btnRelative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relative"
+            android:layout_marginLeft="8dp"/>
+
+        <Button
+            android:id="@+id/btnTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Table"
+            android:layout_marginLeft="8dp"/>
+    </LinearLayout>
+
+    
+    <FrameLayout
+        android:id="@+id/layoutContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp">
+
+       
+       <LinearLayout
+            android:id="@+id/linearLayoutExample"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E0F7FA"
+            android:visibility="gone">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 1"
+                android:layout_margin="8dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 2"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+      
+        <RelativeLayout
+            android:id="@+id/relativeLayoutExample"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFCDD2"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="This is RelativeLayout"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+      
+        <TableLayout
+            android:id="@+id/tableLayoutExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            android:background="#C8E6C9"
+            android:visibility="gone">
+
+            <TableRow>
+                <TextView
+                    android:text="Row 1, Col 1"
+                    android:padding="10dp"/>
+                <TextView
+                    android:text="Row 1, Col 2"
+                    android:padding="10dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Row 2, Col 1"
+                    android:padding="10dp"/>
+                <TextView
+                    android:text="Row 2, Col 2"
+                    android:padding="10dp"/>
+            </TableRow>
+        </TableLayout>
+
+    </FrameLayout>
+</LinearLayout>
+
+package com.example.prog7;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+    TextView txtCurrent;
+    LinearLayout linearLayoutExample;
+    RelativeLayout relativeLayoutExample;
+    TableLayout tableLayoutExample;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        txtCurrent = (TextView) findViewById(R.id.txtCurrent);
+        linearLayoutExample = (LinearLayout) findViewById(R.id.linearLayoutExample);
+        relativeLayoutExample = (RelativeLayout) findViewById(R.id.relativeLayoutExample);
+        tableLayoutExample = (TableLayout) findViewById(R.id.tableLayoutExample);
+
+        Button btnLinear = (Button) findViewById(R.id.btnLinear);
+        Button btnRelative = (Button) findViewById(R.id.btnRelative);
+        Button btnTable = (Button) findViewById(R.id.btnTable);
+
+        // Button actions
+        btnLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLayout("LinearLayout");
+                linearLayoutExample.setVisibility(View.VISIBLE);
+                relativeLayoutExample.setVisibility(View.GONE);
+                tableLayoutExample.setVisibility(View.GONE);
+            }
+        });
+
+        btnRelative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLayout("RelativeLayout");
+                linearLayoutExample.setVisibility(View.GONE);
+                relativeLayoutExample.setVisibility(View.VISIBLE);
+                tableLayoutExample.setVisibility(View.GONE);
+            }
+        });
+
+        btnTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLayout("TableLayout");
+                linearLayoutExample.setVisibility(View.GONE);
+                relativeLayoutExample.setVisibility(View.GONE);
+                tableLayoutExample.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void showLayout(String name) {
+        txtCurrent.setText("Currently showing: " + name);
+    }
+}
+	
+
+PROGRAM 8:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:paddingBottom="@dimen/activity_vertical_margin"
+ android:paddingLeft="@dimen/activity_horizontal_margin"
+ android:paddingRight="@dimen/activity_horizontal_margin"
+ android:paddingTop="@dimen/activity_vertical_margin"
+ tools:context=".MainActivity" >
+ 
+ <LinearLayout
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:gravity="center"
+ android:orientation="vertical"
+ android:padding="20dp">
+ 
+ <TextView
+ android:id="@+id/textView1"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:text="Welcome to Menu Demo"
+ android:textSize="20sp"
+ android:padding="10dp"/>
+ 
+</LinearLayout>
+</RelativeLayout>
+package com.example.prog8;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+  TextView textView;
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+  textView = (TextView) findViewById(R.id.textView1);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+  MenuInflater inflater = getMenuInflater();
+  inflater.inflate(R.menu.main_menu, menu);
+  return true;
+  }
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+  switch (item.getItemId()) {
+  
+  case R.id.menu_about:
+  textView.setText("You selected About");
+  Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show();
+  return true;
+  
+  case R.id.menu_settings:
+  textView.setText("You selected Settings");
+  Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+  return true;
+  
+  case R.id.menu_exit:
+  Toast.makeText(this, "Exiting...", Toast.LENGTH_SHORT).show();
+  finish();
+
+return true;
+default:
+return super.onOptionsItemSelected(item);
+}
+}
+}
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+ <item
+ android:id="@+id/menu_about"
+ android:title="About"
+ android:icon="@android:drawable/ic_menu_info_details"/>
+ <item
+ android:id="@+id/menu_settings"
+ android:title="Settings"
+ android:icon="@android:drawable/ic_menu_manage"/>
+ <item
+ android:id="@+id/menu_exit"
+ android:title="Exit"
+ android:icon="@android:drawable/ic_lock_power_off"/>
+</menu>
+
+
+PROGRAM 9:
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:paddingBottom="@dimen/activity_vertical_margin"
+ android:paddingLeft="@dimen/activity_horizontal_margin"
+ android:paddingRight="@dimen/activity_horizontal_margin"
+ android:paddingTop="@dimen/activity_vertical_margin"
+ tools:context=".MainActivity" >
+ <LinearLayout
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:gravity="center"
+ android:orientation="vertical"
+ android:padding="20dp" >
+ <EditText
+ android:id="@+id/etNum1"
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ android:layout_marginBottom="10dp"
+ android:hint="Enter Number 1"
+ android:inputType="numberDecimal" />
+ <EditText
+ android:id="@+id/etNum2"
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ android:layout_marginBottom="10dp"
+ android:hint="Enter Number 2"
+ android:inputType="numberDecimal" />
+ <LinearLayout
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ android:layout_marginBottom="10dp"
+ android:gravity="center"
+ android:orientation="horizontal" >
+ <Button
+ android:id="@+id/btnAdd"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:text="+" />
+ <Button
+ android:id="@+id/btnSub"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:layout_marginLeft="10dp"
+ android:text="-" />
+ <Button
+ android:id="@+id/btnMul"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:layout_marginLeft="10dp"
+ android:text="×" />
+ <Button
+ android:id="@+id/btnDiv"
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:layout_marginLeft="10dp"
+ android:text="÷" />
+ </LinearLayout>
+ <EditText
+ android:id="@+id/etResult"
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ android:layout_marginTop="10dp"
+ android:clickable="false"
+ android:focusable="false"
+ android:hint="Result" />
+ </LinearLayout>
+</RelativeLayout>
+
+package com.example.prog9;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+public class MainActivity extends Activity {
+EditText etNum1, etNum2, etResult;
+Button btnAdd, btnSub, btnMul, btnDiv;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+etNum1 = (EditText) findViewById(R.id.etNum1);
+etNum2 = (EditText) findViewById(R.id.etNum2);
+etResult = (EditText) findViewById(R.id.etResult);
+btnAdd = (Button) findViewById(R.id.btnAdd);
+btnSub = (Button) findViewById(R.id.btnSub);
+btnMul = (Button) findViewById(R.id.btnMul);
+btnDiv = (Button) findViewById(R.id.btnDiv);
+btnAdd.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+calculate('+');
+}
+});
+
+btnSub.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+calculate('-');
+}
+});
+
+btnMul.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+calculate('*');
+}
+});
+
+btnDiv.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+calculate('/');
+}
+});
+}
+private void calculate(char operator) {
+String n1 = etNum1.getText().toString();
+String n2 = etNum2.getText().toString();
+String n3 = "";
+if (n1.equals(n3) || n2.equals(n3)) {
+Toast.makeText(this, "Enter both numbers", Toast.LENGTH_SHORT)
+.show();
+return;
+}
+double num1 = Double.parseDouble(n1);
+double num2 = Double.parseDouble(n2);
+double result = 0;
+switch (operator) {
+case '+':
+result = num1 + num2;
+break;
+case '-':
+result = num1 - num2;
+break;
+case '*':
+result = num1 * num2;
+break;
+case '/':
+if (num2 == 0) {
+Toast.makeText(this, "Cannot divide by zero",
+Toast.LENGTH_SHORT).show();
+return;
+}
+result = num1 / num2;
+break;
+}
+etResult.setText(String.valueOf(result));
+}
+}
+  
+PROGRAM 10:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent" 
+    android:paddingBottom="@dimen/activity_vertical_margin" 
+    android:paddingLeft="@dimen/activity_horizontal_margin" 
+    android:paddingRight="@dimen/activity_horizontal_margin" 
+    android:paddingTop="@dimen/activity_vertical_margin" 
+    tools:context=".MainActivity" > 
+ 
+    <TextView 
+        android:id="@+id/scoreText" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Score: 0" 
+        android:textSize="20sp" 
+        android:layout_alignParentTop="true" 
+        android:layout_centerHorizontal="true"/> 
+ 
+    <TextView 
+        android:id="@+id/timerText" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="Time: 30" 
+        android:textSize="20sp" 
+        android:layout_below="@id/scoreText" 
+        android:layout_centerHorizontal="true"/> 
+ 
+    <Button 
+        android:id="@+id/tapButton" 
+android:layout_width="100dp" 
+android:layout_height="100dp" 
+android:text="Tap Me!" 
+android:layout_centerInParent="true"/> 
+</RelativeLayout> 
+
+package com.example.prog10;
+
+import java.util.Random;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+    private RelativeLayout mainLayout;
+    private Button tapButton;
+    private TextView scoreText, timerText;
+    private int score = 0;
+    private int layoutWidth, layoutHeight;
+    private Random random = new Random();
+    private CountDownTimer gameTimer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Create layout programmatically
+        mainLayout = new RelativeLayout(this);
+
+        scoreText = new TextView(this);
+        scoreText.setText("Score: 0");
+        scoreText.setTextSize(20);
+
+        timerText = new TextView(this);
+        timerText.setText("Time: 30");
+        timerText.setTextSize(20);
+
+        tapButton = new Button(this);
+        tapButton.setText("Tap Me");
+
+        // Add views to layout
+        RelativeLayout.LayoutParams scoreParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        scoreParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        scoreParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+        RelativeLayout.LayoutParams timerParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        timerParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        timerParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+        RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        buttonParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        mainLayout.addView(scoreText, scoreParams);
+        mainLayout.addView(timerText, timerParams);
+        mainLayout.addView(tapButton, buttonParams);
+
+        setContentView(mainLayout);
+
+        // Measure layout size after it’s drawn
+        mainLayout.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @SuppressLint("NewApi") @Override
+                    public void onGlobalLayout() {
+                        layoutWidth = mainLayout.getWidth();
+                        layoutHeight = mainLayout.getHeight();
+
+                        // Compatibility fix
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        } else {
+                            mainLayout.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
+                    }
+                });
+
+        // Button tap listener
+        tapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                score++;
+                scoreText.setText("Score: " + score);
+                moveButton();
+            }
+        });
+
+        // Start game timer (30 seconds)
+        gameTimer = new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timerText.setText("Time: " + millisUntilFinished / 1000);
+            }
+
+            @Override
+            public void onFinish() {
+                timerText.setText("Time: 0");
+                tapButton.setEnabled(false);
+                Toast.makeText(MainActivity.this,
+                        "Game Over! Your Score: " + score,
+                        Toast.LENGTH_LONG)
+                        .show();
+            }
+        };
+        gameTimer.start();
+    }
+
+    @SuppressLint("NewApi")
+    private void moveButton() {
+        if (layoutWidth == 0 || layoutHeight == 0)
+            return;
+
+        int buttonWidth = tapButton.getWidth();
+        int buttonHeight = tapButton.getHeight();
+
+        int randomX = random.nextInt(layoutWidth - buttonWidth);
+        int randomY = random.nextInt(layoutHeight - buttonHeight);
+
+        // Compatibility fix: use LayoutParams instead of setX/setY
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tapButton.getLayoutParams();
+        params.leftMargin = randomX;
+        params.topMargin = randomY;
+        tapButton.setLayoutParams(params);
+    }
+}
+
 
