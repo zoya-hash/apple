@@ -392,7 +392,7 @@ header("Location: login.php");
 exit(); 
 ?>
 ------------------------------------------------------------------------------------------------------------------------------------------
-PROGRAM 7 
+PROGRAM 7 and 8
 <?php 
 // Set timezone 
 date_default_timezone_set("Asia/Kolkata"); 
@@ -488,8 +488,7 @@ and holistic development of students to serve society.
 </div> 
 </body> 
 </html>
-------------------------------------------------------------------------------------------------------------------------------------------
-PROGRAM 8
+
 ABOUT .PHP 
 <!DOCTYPE html> 
 <html> 
@@ -515,8 +514,6 @@ with Bharathiar University...</p>
 </html> 
  
  
- 
- 
 Department.php 
  
 <<?php setcookie("lastVisit", date("d-m-Y H:i:s"), time() + 3600); ?> 
@@ -536,8 +533,7 @@ Department.php
     </div> 
 </body> 
 </html> 
- 
- 
+  
  
 LIBRARY.PHP 
  
@@ -558,8 +554,7 @@ LIBRARY.PHP
     </div> 
 </body> 
 </html> 
- 
- 
+  
  
 Contact.php 
  
