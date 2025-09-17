@@ -318,3 +318,391 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+PROGRAM 6
+
+login.php 
+<?php 
+session_start(); 
+ 
+// Hardcoded credentials 
+$USERNAME = "admin"; 
+$PASSWORD = "12345"; 
+ 
+// Hardcoded user info 
+$userInfo = [ 
+    "name"  => "John Doe", 
+    "email" => "john.doe@example.com", 
+    "phone" => "+91 9876543210", 
+    "profile_pic" => "profile.jpg" 
+]; 
+ 
+if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+    $user = $_POST['username']; 
+    $pass = $_POST['password']; 
+ 
+    if ($user === $USERNAME && $pass === $PASSWORD) { 
+        $_SESSION['username'] = $user; 
+        $_SESSION['info'] = $userInfo;  // Store info 
+        header("Location: profile.php"); 
+        exit(); 
+    } else { 
+        $error = "Invalid Username or Password!"; 
+    } 
+} 
+?> 
+<!DOCTYPE html> 
+<html> 
+<head><title>Login</title></head> 
+<body> 
+    <h2>Login Form</h2> 
+    <?php if (!empty($error)) echo "<p style='color:red;'>$error</p>"; ?> 
+    <form method="post"> 
+        Username: <input type="text" name="username" required><br><br> 
+        Password: <input type="password" name="password" required><br><br> 
+        <input type="submit" value="Login"> 
+</form> 
+</body> 
+</html> 
+Profile.php 
+<?php 
+session_start(); 
+if (!isset($_SESSION['username'])) { 
+header("Location: login.php"); 
+exit(); 
+} 
+$info = $_SESSION['info']; 
+?> 
+<!DOCTYPE html> 
+<html> 
+<head><title>Profile</title></head> 
+<body> 
+<h2>Welcome, <?php echo htmlspecialchars($info['name']); ?>!</h2> 
+<img src="<?php echo $info['profile_pic']; ?>" width="120" height="120"><br><br> 
+<p><b>Email:</b> <?php echo htmlspecialchars($info['email']); ?></p> 
+<p><b>Phone:</b> <?php echo htmlspecialchars($info['phone']); ?></p> 
+<a href="logout.php">Logout</a> 
+</body> 
+</html> 
+Logout.php 
+<?php 
+session_start(); 
+session_destroy(); 
+header("Location: login.php"); 
+exit(); 
+?>
+------------------------------------------------------------------------------------------------------------------------------------------
+PROGRAM 7 
+<?php 
+// Set timezone 
+date_default_timezone_set("Asia/Kolkata"); 
+// Check if cookie exists 
+if (isset($_COOKIE['lastVisit'])) { 
+$lastVisit = $_COOKIE['lastVisit']; 
+} else { 
+$lastVisit = "This is your first visit!"; 
+} 
+// Set (or reset) cookie for current time 
+$currentTime = date("d-m-Y H:i:s"); 
+setcookie("lastVisit", $currentTime, time() + 3600); // expires in 1 hour 
+?> 
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>PSGCAS - Home</title> 
+<style> 
+body { 
+margin: 0; 
+font-family: Arial, sans-serif; 
+color: white; 
+background: url("psgcas_entrance.jpg") no-repeat center center/cover; 
+} 
+/* Transparent layer over the background */ 
+.overlay { 
+background: rgba(0, 0, 0, 0.6); 
+min-height: 100vh; 
+padding: 20px; 
+} 
+header, footer { 
+text-align: center; 
+} 
+header h1 { font-size: 32px; margin: 0; } 
+header p { font-size: 18px; margin: 5px 0 20px; } 
+nav { text-align: center; margin: 20px 0; } 
+nav a { 
+color: yellow; 
+margin: 0 15px; 
+text-decoration: none; 
+font-weight: bold; 
+} 
+nav a:hover { text-decoration: underline; } 
+section { 
+max-width: 800px; 
+margin: 20px auto; 
+padding: 15px; 
+background: rgba(255, 255, 255, 0.1); 
+border-radius: 8px; 
+} 
+section h2 { color: yellow; } 
+footer { 
+padding: 10px; 
+background: rgba(0,0,0,0.7); 
+position: fixed; 
+bottom: 0; 
+width: 100%; 
+} 
+</style> 
+</head> 
+<body> 
+<div class="overlay"> 
+<header> 
+<h1>Welcome to PSG College of Arts & Science</h1> 
+<p>Excellence in Education Since 1947</p> 
+<p style="color:lightgreen;">Last Visit: <?php echo $lastVisit; ?></p> 
+</header> 
+<nav> 
+<a href="#">Home</a> 
+<a href="About.php">About Us</a> 
+<a href="department.php">Departments</a> 
+<a href="Library.php">Library</a> 
+<a href="Contact.php">Contact</a> 
+</nav> 
+<section> 
+<h2>About PSGCAS</h2> 
+<p> 
+PSG College of Arts & Science (PSGCAS), Coimbatore, is one of the most prestigious institutions 
+in Tamil Nadu. The college offers undergraduate, postgraduate, and research programs 
+in arts, science, commerce, and technology. 
+</p> 
+</section> 
+<section> 
+<h2>Vision & Mission</h2> 
+<p> 
+Our vision is to provide world-class education and foster research, innovation, 
+and holistic development of students to serve society. 
+</p> 
+</section> 
+<footer> 
+<p>&copy; <?php echo date("Y"); ?> PSGCAS | All Rights Reserved</p> 
+</footer> 
+</div> 
+</body> 
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------
+PROGRAM 8
+ABOUT .PHP 
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>About - PSG College</title> 
+</head> 
+<body> 
+<div class="navbar"> 
+<strong>PSG COLLEGE OF ARTS & SCIENCE</strong> 
+<a href="index.php">Home</a> 
+        <a href="about.php">About</a> 
+        <a href="programmes.php">Programs</a> 
+        <a href="exams.php">Exams</a> 
+        <a href="placement.php">Placement</a> 
+    </div> 
+ 
+    <div class="content"> 
+        <h2>About Us</h2> 
+        <p>PSG College of Arts & Science was established in 1947. It is an autonomous institution affiliated 
+with Bharathiar University...</p> 
+    </div> 
+</body> 
+</html> 
+ 
+ 
+ 
+ 
+Department.php 
+ 
+<<?php setcookie("lastVisit", date("d-m-Y H:i:s"), time() + 3600); ?> 
+<!DOCTYPE html> 
+<html> 
+<head><title>Departments - PSG College</title></head> 
+<body> 
+    <div class="navbar"> 
+        <strong>PSG COLLEGE</strong> 
+        <a href="home.php">Home</a><a href="about.php">About</a><a href="departments.php">Depar
+ tments</a><a href="library.php">Library</a><a href="contact.php">Contact</a> 
+    </div> 
+    <div class="content"> 
+        <h2>Departments</h2> 
+        <p>Explore our academic departments...</p> 
+        <p>Last Visit: <?php echo $_COOKIE['lastVisit'] ?? 'First Visit'; ?></p> 
+    </div> 
+</body> 
+</html> 
+ 
+ 
+ 
+LIBRARY.PHP 
+ 
+<?php setcookie("lastVisit", date("d-m-Y H:i:s"), time() + 3600); ?> 
+<!DOCTYPE html> 
+<html> 
+<head><title>Library - PSG College</title></head> 
+<body> 
+    <div class="navbar"> 
+        <strong>PSG COLLEGE</strong> 
+        <a href="home.php">Home</a><a href="about.php">About</a><a href="departments.php">Depar
+ tments</a><a href="library.php">Library</a><a href="contact.php">Contact</a> 
+    </div> 
+    <div class="content"> 
+        <h2>Library</h2> 
+        <p>Our library provides access to numerous resources.</p> 
+        <p>Last Visit: <?php echo $_COOKIE['lastVisit'] ?? 'First Visit'; ?></p> 
+    </div> 
+</body> 
+</html> 
+ 
+ 
+ 
+Contact.php 
+ 
+<?php setcookie("lastVisit", date("d-m-Y H:i:s"), time() + 3600); ?> 
+<!DOCTYPE html> 
+<html> 
+<head><title>Contact - PSG College</title></head> 
+<body> 
+    <div class="navbar"> 
+        <strong>PSG COLLEGE</strong> 
+        <a href="home.php">Home</a><a href="about.php">About</a><a href="departments.php">Depar
+ tments</a><a href="library.php">Library</a><a href="contact.php">Contact</a> 
+    </div> 
+    <div class="content"> 
+        <h2>Contact Us</h2> 
+        <p>Email: info@psgcas.ac.in | Phone: +91 422 4303300</p> 
+        <p>Last Visit: <?php echo $_COOKIE['lastVisit'] ?? 'First Visit'; ?></p> 
+    </div> 
+</body> 
+</html> 
+------------------------------------------------------------------------------------------------------------------------------------------
+PROGRAM 9
+
+<?php 
+// Step 1: Database connection 
+$servername = "localhost"; 
+$username = "root";   // WAMP default username 
+$password = "";       // WAMP default password is empty 
+$dbname = "students"; 
+ 
+// Create connection 
+$conn = new mysqli($servername, $username, $password, $dbname); 
+ 
+// Check connection 
+if ($conn->connect_error) { 
+    die("Connection failed: " . $conn->connect_error); 
+} 
+?> 
+ 
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Find Student Details</title> 
+</head> 
+<body> 
+    <h2>Search Student</h2> 
+    <!-- Step 2: Input form --> 
+    <form method="post" action=""> 
+        Enter Student ID: <input type="number" name="Rollno" required> 
+        <input type="submit" value="Search"> 
+    </form> 
+ 
+<?php 
+// Step 3: When user submits the form 
+if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+    $Rollno = $_POST['Rollno']; 
+ 
+    // Step 4: Query the database 
+    $sql = "SELECT * FROM students WHERE Rollno = $Rollno"; 
+    $result = $conn->query($sql); 
+ 
+    // Step 5: Display result 
+    if ($result->num_rows > 0) { 
+        echo "<h3>Student Details</h3>"; 
+        while ($row = $result->fetch_assoc()) { 
+            echo "Roll No: " . $row["Rollno"] . "<br>"; 
+            echo "Name: " . $row["Name"] . "<br>"; 
+        } 
+    } else { 
+echo "<p style='color:red;'>No student found with ID: $Rollno</p>"; 
+} 
+} 
+$conn->close(); 
+?> 
+</body> 
+</html> 
+------------------------------------------------------------------------------------------------------------------------------------------
+PROGRAM 10
+<?php 
+// Database connection 
+$servername = "localhost"; 
+$username   = "root";   // default for WAMP 
+$password   = "";       
+// default = empty 
+$dbname     = "students"; // change this to your database name 
+// Create connection using mysqli 
+$conn = new mysqli($servername, $username, $password, $dbname); 
+// Check connection 
+if ($conn->connect_error) { 
+die("Connection failed: " . $conn->connect_error); 
+} 
+// --------------------- 
+// Example SQL Queries 
+// --------------------- 
+ 
+// 1. Display all employees 
+$sql = "SELECT * FROM employee"; 
+ 
+// 2. Insert a new employee 
+// $sql = "INSERT INTO employees VALUES (4, 'Kalai', 'Developer', 76000)"; 
+ 
+// 3. Select only name and position where salary > 50000 
+// $sql = "SELECT name, position FROM employees WHERE salary > 50000"; 
+ 
+// 4. Update salary for an employee named 'Saranya' 
+// $sql = "UPDATE employees SET salary = 500000 WHERE name = 'Saranya'"; 
+ 
+// 5. Order employees by name (Ascending) 
+// $sql = "SELECT * FROM employees ORDER BY name ASC"; 
+ 
+// 6. Order employees by salary (Descending) 
+// $sql = "SELECT * FROM employees ORDER BY salary DESC"; 
+ 
+// 7. Delete one employee by ID 
+// $sql = "DELETE FROM employees WHERE id = 3"; 
+ 
+// 8. Count total employees 
+// $sql = "SELECT COUNT(*) AS total FROM employees"; 
+ 
+// --------------------- 
+ 
+// Run the query 
+$result = $conn->query($sql); 
+ 
+// Display results if it's a SELECT 
+if ($result && $result instanceof mysqli_result) { 
+    if ($result->num_rows > 0) { 
+        while ($row = $result->fetch_assoc()) { 
+            echo "<pre>"; 
+            print_r($row); 
+            echo "</pre>"; 
+        } 
+    } else { 
+        echo "No records found."; 
+    } 
+} else { 
+    if ($result === TRUE) { 
+        echo "Query executed successfully!"; 
+    } else { 
+        echo "Error: " . $conn->error; 
+    } 
+} 
+ 
+// Close connection 
+$conn->close(); 
+?> 
